@@ -2,6 +2,7 @@ package hh.swd20.BookReview.domain;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,10 +14,10 @@ public class Category {
 
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Id
-	private Long id;
+	private Long categoryId;
 	private String name;
 	
-	@OneToMany()
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
 	private List<Book> books;
 	
 	public Category() {}
@@ -27,11 +28,11 @@ public class Category {
 	}
 
 	public Long getId() {
-		return id;
+		return categoryId;
 	}
 
 	public void setId(Long id) {
-		this.id = id;
+		this.categoryId = id;
 	}
 
 	public String getName() {

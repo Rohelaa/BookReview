@@ -4,12 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import hh.swd20.BookReview.domain.Book;
 import hh.swd20.BookReview.domain.BookRepository;
+import hh.swd20.BookReview.domain.Category;
 import hh.swd20.BookReview.domain.CategoryRepository;
+import hh.swd20.BookReview.domain.Review;
+import hh.swd20.BookReview.domain.ReviewRepository;
 
 @Controller
 public class BookController {
@@ -19,6 +23,9 @@ public class BookController {
 	
 	@Autowired
 	private CategoryRepository categoryRepo;
+	
+	@Autowired
+	private ReviewRepository reviewRepo;
 
 	@RequestMapping("/")
 	public String index() {
@@ -34,13 +41,34 @@ public class BookController {
 	@GetMapping("/addBook")
 	public String addNewBook(Model model) {
 		model.addAttribute("book", new Book());
-		model.addAttribute("categories", categoryRepo.findAll());
+		//model.addAttribute("categories", categoryRepo.findAll());
+		model.addAttribute("category", new Category());
 		return "addBook";
 	}
 	
 	@PostMapping("/saveBook")
-	public String saveNewBook(Book book) {
+	public String saveNewBook(Book book, Category category) {
+		
+		// Luotu kategoria on ensin tallennettava repoon, jotta sen voi setterillä tallettaa olion muuttujaan
+		
+		categoryRepo.save(category);
+		
+		if (category != null) {
+			book.setCategory(category);
+		}
+		
 		bookRepo.save(book);
 		return "redirect:books";
 	}
+	
+	@GetMapping("/book/{title}")
+	public String showBookInformation(@PathVariable(name = "title") String bookTitle, Model model) {
+		model.addAttribute("book", bookRepo.findByTitle(bookTitle));
+		model.addAttribute("reviews", reviewRepo.findAll());
+		return "bookInformation";
+	}
+	
+	
+	
+	
 }

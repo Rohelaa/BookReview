@@ -5,10 +5,11 @@
 <title>Books</title>
 </head>
 <body>
+	
+	<a href="/addBook">Add a new book</a>
 
 	<div th:each="book : ${books}">
-		<p th:text="${book.name}"></p>
-		<p th:text="${book.author}"></p>
+		<a th:href="@{book/{title}(title=${book.title})}" th:text="${book.title} + '|' + ${book.author}"></a>
 	</div>
 
 </body>

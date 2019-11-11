@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>asd</title>
+</head>
+<body>
+	<a th:href="@{review/{title}(title=${book.title})}">Review this book</a>
+	<div th:object="${book}">
+		<p th:text="*{title}"></p>
+		<p th:text="*{author}"></p>
+		<p th:text="*{year}"></p>
+		<p th:text="*{category.name}"></p>
+		<p th:text="*{reviews}"></p>
+	</div>
+	<!-- <form th:object="${review}" action="#" th:action="@{saveReview}" method="post">
+		<label>Reviewer:</label>
+		<input type="text" th:field="*{reviewer}" /><br />
+		<label>Review:</label>
+		<input type="text" th:field="*{reviewText}" /><br />
+		<label>Rating:</label>
+		<input type="text" th:field="*{rating}" /><br />
+		<input type="submit" value="Submit" />
+	</form> -->
+	<div th:each="review : ${reviews}">
+	<p th:text="${review.reviewText}"></p>
+	</div>
+
+</body>
+</html>

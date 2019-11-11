@@ -1,10 +1,14 @@
 package hh.swd20.BookReview.domain;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -19,21 +23,28 @@ public class Book {
 	private String year;
 	
 	@ManyToOne
+	@JoinColumn(name = "categoryId")
 	private Category category;
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "book")
 	private List<Review> reviews;
 	
-	public Book() {}
+	public Book() {
+		this.reviews = new ArrayList<Review>();
+	}
 
 	public Book(String title, String author, String year, Category category) {
 		super();
-		
+		this.reviews = new ArrayList<Review>();
 		this.title = title;
 		this.author = author;
 		this.year = year;
 		this.category = category;
 		
+	}
+	
+	public void addNewReview(Review review) {
+		this.reviews.add(review);
 	}
 
 	public Long getId() {

@@ -29,6 +29,7 @@ public class BookReviewApplication {
 			logger.info("Added few categories.");
 			categoryRepository.save(new Category("Realismi"));
 			categoryRepository.save(new Category("Allegoria"));
+			categoryRepository.save(new Category("Historiallinen romaani"));
 			
 			logger.info("Added books.");
 			bookRepository.save(new Book("Eläinten vallankumous", "George Orwell", "1945", categoryRepository.findByName("Allegoria")));

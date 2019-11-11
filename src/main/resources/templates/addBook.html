@@ -7,9 +7,13 @@
 <body>
 	<form th:object="${book}" action="#" method="post" th:action="@{saveBook}">
 		<label>Title: </label> <input th:field="*{title}" /><br /> <label>Author: </label> <input th:field="*{author}" /><br />
-		<label>Year: </label> <input th:field=*{year} /><br /> <label>Category: </label> <select th:field="*{category}">
+		<label>Year: </label> <input th:field=*{year} /><br /> <!-- <label>Category: </label> <select th:field="*{category}">
 			<option th:each="category : ${categories}" th:text="${category.name}" th:value="${category.id}" ></option>
-		</select><br /> <input type="submit" value="Add" />
+		</select><br />  -->
+		<label>Create a new category:</label>
+		<input type="text" th:field="${category.name}" /><br />
+		<input type="submit" value="Add" />
+		
 	</form>
 </body>
 </html>
