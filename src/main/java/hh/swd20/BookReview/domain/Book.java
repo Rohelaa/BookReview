@@ -14,7 +14,7 @@ public class Book {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Id
 	private Long id;
-	private String name;
+	private String title;
 	private String author;
 	private String year;
 	
@@ -26,14 +26,14 @@ public class Book {
 	
 	public Book() {}
 
-	public Book(Long id, String name, String author, String year, Category category, List<Review> reviews) {
+	public Book(String title, String author, String year, Category category) {
 		super();
-		this.id = id;
-		this.name = name;
+		
+		this.title = title;
 		this.author = author;
 		this.year = year;
 		this.category = category;
-		this.reviews = reviews;
+		
 	}
 
 	public Long getId() {
@@ -44,12 +44,12 @@ public class Book {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public String getAuthor() {
