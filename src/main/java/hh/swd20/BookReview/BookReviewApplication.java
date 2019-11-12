@@ -11,6 +11,7 @@ import hh.swd20.BookReview.domain.Book;
 import hh.swd20.BookReview.domain.BookRepository;
 import hh.swd20.BookReview.domain.Category;
 import hh.swd20.BookReview.domain.CategoryRepository;
+import hh.swd20.BookReview.domain.Review;
 
 @SpringBootApplication
 public class BookReviewApplication {
@@ -33,7 +34,14 @@ public class BookReviewApplication {
 			
 			logger.info("Added books.");
 			bookRepository.save(new Book("Eläinten vallankumous", "George Orwell", "1945", categoryRepository.findByName("Allegoria")));
-			bookRepository.save(new Book("Rikos ja rangaistus", "F.M Dostojevski", "1866", categoryRepository.findByName("Realismi")));
+			Book book2 = new Book("Rikos ja rangaistus", "F.M Dostojevski", "1866", categoryRepository.findByName("Realismi"));
+			
+			logger.info("Added reviews");
+			book2.addNewReview(new Review("Roope Laakso", "5", "Jee"));
+			book2.addNewReview(new Review("ASDADS", "4", "asdojasodasodjoasdjoasdoasdjoas"));
+			
+			
+			bookRepository.save(book2);
 			
 			
 		};

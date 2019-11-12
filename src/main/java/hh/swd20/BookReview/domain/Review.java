@@ -23,13 +23,11 @@ public class Review {
 	
 	public Review() {}
 
-	public Review(Long id, String reviewer, String rating, String reviewText, Book book) {
+	public Review(String reviewer, String rating, String reviewText) {
 		super();
-		this.reviewId = id;
 		this.reviewer = reviewer;
 		this.rating = rating;
 		this.reviewText = reviewText;
-		this.book = book;
 	}
 
 	public Long getId() {
