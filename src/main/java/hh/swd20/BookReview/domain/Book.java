@@ -12,20 +12,24 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Book {
 
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Id
-	private Long id;
+	private Long bookId;
 	private String title;
 	private String author;
 	private String year;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "categoryId")
 	private Category category;
 	
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "book")
 	private List<Review> reviews;
 	
@@ -48,11 +52,11 @@ public class Book {
 	}
 
 	public Long getId() {
-		return id;
+		return bookId;
 	}
 
 	public void setId(Long id) {
-		this.id = id;
+		this.bookId = id;
 	}
 
 	public String getTitle() {
@@ -94,6 +98,13 @@ public class Book {
 	public void setReviews(List<Review> reviews) {
 		this.reviews = reviews;
 	}
+
+	@Override
+	public String toString() {
+		return "Book [bookId=" + bookId + ", title=" + title + ", author=" + author + ", year=" + year + ", category="
+				+ category + ", reviews=" + reviews + "]";
+	}
+	
 	
 	
 	

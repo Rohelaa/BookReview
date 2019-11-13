@@ -1,19 +1,49 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+
 <meta charset="utf-8">
 <title>Add a new book</title>
 </head>
 <body>
-	<form th:object="${book}" action="#" method="post" th:action="@{saveBook}">
-		<label>Title: </label> <input th:field="*{title}" /><br /> <label>Author: </label> <input th:field="*{author}" /><br />
-		<label>Year: </label> <input th:field=*{year} /><br /> <!-- <label>Category: </label> <select th:field="*{category}">
-			<option th:each="category : ${categories}" th:text="${category.name}" th:value="${category.id}" ></option>
-		</select><br />  -->
-		<label>Create a new category:</label>
-		<input type="text" th:field="${category.name}" /><br />
-		<input type="submit" value="Add" />
+	<!-- Google CDN (content delivery network) -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	
+	<!-- Kokeilua. Painiketta klikkaamalla aukeaisi syöttökenttä, johon voisi syöttää uuden kategorian nimen -->
+	<script type="text/javascript">
+	
+		$(document).ready(function() {
+			
+			$('#createNew').click(function() {
+				$('#categoryCreator').css("visibility", "visible");
+			});
+			
+		});
 		
+	</script>
+
+	<form th:object="${book}" action="#" method="post"
+		th:action="@{saveBook}">
+		<label>Title: </label> <input th:field="*{title}" /><br /> <label>Author:
+		</label> <input th:field="*{author}" /><br /> <label>Year: </label> <input
+			th:field=*{year} /><br /> <label>Category: </label> <select
+			th:field="*{category}">
+			<option th:each="category : ${categories}" th:text="${category.name}"
+				th:value="${category.id}"></option>
+			<!-- <option value="new">Create new</option> -->
+		</select><br />
+		
+		<button id="createNew">Create new</button>
+		
+		<!-- Kenttä, joka tulisi näkyviin painiketta klikkaamalla -->
+		<!-- inline CSS  -->
+		<div style="visibility: hidden;" id="categoryCreator">
+			<label>Create a new category:</label>
+			<input type="text" th:field="${category.name}" /><br />
+		</div>
+		
+		<input type="submit" value="Add" /> 
+
 	</form>
 </body>
 </html>

@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Category {
 
@@ -17,6 +19,7 @@ public class Category {
 	private Long categoryId;
 	private String name;
 	
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
 	private List<Book> books;
 	
@@ -50,6 +53,12 @@ public class Category {
 	public void setBooks(List<Book> books) {
 		this.books = books;
 	}
+
+	@Override
+	public String toString() {
+		return "Category [categoryId=" + categoryId + ", name=" + name + ", books=" + books + "]";
+	}
+	
 	
 	
 }

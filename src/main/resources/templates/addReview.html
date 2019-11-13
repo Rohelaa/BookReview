@@ -6,14 +6,15 @@
 </head>
 <body>
 	<form th:object="${review}" th:action="@{/saveReview}" action="#" method="post">
-		<input type="hidden" th:field="${book.title}" th:value="${book.title}" />
-		<input type="hidden" th:field="*{book}" th:value="${book}" />
+		<input type=hidden th:field="${book.title}" th:value="${book.title}" />
+		<!-- <input type="hidden" th:field="*{book}" th:value="${book}" /> -->
 		<label>Reviewer</label>
 		<input type="text" th:field="*{reviewer}" /><br />
 		<label>Review</label>
 		<input type="text" th:field="*{reviewText}" /><br />
 		<label>Rating</label>
 		<input type="text" th:field="*{rating}" /><br />
+		<!-- <input type="text" th:field="*{book}" th:value="${book.title}" /> -->
 		<input type="submit" value="Submit" />	
 	</form>
 

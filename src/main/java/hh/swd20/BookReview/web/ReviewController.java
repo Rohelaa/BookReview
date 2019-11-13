@@ -28,13 +28,27 @@ public class ReviewController {
 		return "addReview";
 	}
 	
+	
+	
 	@PostMapping("saveReview")
 	public String saveReview(Review review, Book book) {
-		bookRepo.save(book);
-		review.setBook(book);
+		//review.setBook(book);
+		
+		// toimii kait
+		// haetaan reposta kirja, jonka title on näkymän attribuutteihin lisätyn kirja-olion title
+		// asetetaan tämä kirja Review-olion muuttujaan setterillä
+		// talletetaan Review-olio repoon
+		
+		Book book1 = bookRepo.findByTitle(book.getTitle());
+		review.setBook(book1);
 		reviewRepo.save(review);
 		book.addNewReview(review);
-		bookRepo.save(bookRepo.findByTitle(book.getTitle()));
+		
+//		bookRepo.save(book);
+//		review.setBook(book);
+//		reviewRepo.save(review);
+//		book.addNewReview(review);
+//		bookRepo.save(bookRepo.findByTitle(book.getTitle()));
 		return "index";
 	}
 }

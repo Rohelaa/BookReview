@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Review {
 
@@ -17,8 +19,9 @@ public class Review {
 	private String rating;
 	private String reviewText;
 	
+	@JsonIgnore
 	@ManyToOne
-	@JoinColumn(name = "id")
+	@JoinColumn(name = "bookId")
 	private Book book;
 	
 	public Review() {}
@@ -28,6 +31,13 @@ public class Review {
 		this.reviewer = reviewer;
 		this.rating = rating;
 		this.reviewText = reviewText;
+	}
+	
+	public Review(String reviewer, String rating, String reviewText, Book book) {
+		this.reviewer = reviewer;
+		this.rating = rating;
+		this.reviewText = reviewText;
+		this.book = book;
 	}
 
 	public Long getId() {

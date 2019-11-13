@@ -39,6 +39,7 @@ public class BookReviewApplication {
 			logger.info("Added reviews");
 			book2.addNewReview(new Review("Roope Laakso", "5", "Jee"));
 			book2.addNewReview(new Review("ASDADS", "4", "asdojasodasodjoasdjoasdoasdjoas"));
+			book2.addNewReview(new Review("Matti", "5", "Sikahyvä!!", book2));
 			
 			
 			bookRepository.save(book2);

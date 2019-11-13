@@ -12,7 +12,9 @@
 		<p th:text="*{author}"></p>
 		<p th:text="*{year}"></p>
 		<p th:text="*{category.name}"></p>
-		<p th:text="*{reviews}"></p>
+
+		<!-- *{reviews} näyttää tyhjän listan -->
+		<!-- <p th:text="*{reviews}"></p> -->
 	</div>
 	<!-- <form th:object="${review}" action="#" th:action="@{saveReview}" method="post">
 		<label>Reviewer:</label>
@@ -24,9 +26,10 @@
 		<input type="submit" value="Submit" />
 	</form> -->
 	<div th:each="review : ${reviews}">
+		<p th:text="${review.reviewer}"></p>
 		<p th:text="${review.reviewText}"></p>
 		<p th:text="${review.rating}"></p>
-		<p th:text="${review.reviewer}"></p>
+
 	</div>
 
 </body>
