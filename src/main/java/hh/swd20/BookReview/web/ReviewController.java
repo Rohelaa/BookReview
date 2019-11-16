@@ -1,5 +1,7 @@
 package hh.swd20.BookReview.web;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,7 +30,24 @@ public class ReviewController {
 		return "addReview";
 	}
 	
-	
+	@GetMapping("book/delete/{bookTitle}/{reviewId}")
+	public String deleteReview(@PathVariable("bookTitle") String bookTitle, @PathVariable("reviewId") Long reviewId, Model model) {
+		
+		reviewRepo.deleteById(reviewId);
+		Book book = bookRepo.findByTitle(bookTitle);
+		List<Review> reviews = book.getReviews();
+		
+		for (Review review : reviews) {
+			if (review.getId() == reviewId) {
+				reviews.remove(review);
+			}
+		}
+		
+		book.setReviews(reviews);
+		
+		// takaisin kirjanäkymään
+		return "redirect:../../../book/" + bookTitle;
+	}
 	
 	@PostMapping("saveReview")
 	public String saveReview(Review review, Book book) {
@@ -49,6 +68,7 @@ public class ReviewController {
 //		reviewRepo.save(review);
 //		book.addNewReview(review);
 //		bookRepo.save(bookRepo.findByTitle(book.getTitle()));
-		return "index";
+		
+		return "redirect:book/" + book.getTitle();
 	}
 }

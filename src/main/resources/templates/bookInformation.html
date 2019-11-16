@@ -29,7 +29,7 @@
 		<p th:text="${review.reviewer}"></p>
 		<p th:text="${review.reviewText}"></p>
 		<p th:text="${review.rating}"></p>
-
+		<a th:href="@{delete/{title}/{id}(title=${book.title}, id=${review.id})}">Delete</a>
 	</div>
 
 </body>
