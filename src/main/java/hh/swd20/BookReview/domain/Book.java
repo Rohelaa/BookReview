@@ -102,7 +102,7 @@ public class Book {
 	@Override
 	public String toString() {
 		return "Book [bookId=" + bookId + ", title=" + title + ", author=" + author + ", year=" + year + ", category="
-				+ category + ", reviews=" + reviews + "]";
+				+ category.getName() + ", reviews=" + this.getReviews() + "]";
 	}
 	
 	

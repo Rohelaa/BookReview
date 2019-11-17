@@ -16,7 +16,6 @@ import hh.swd20.BookReview.domain.Book;
 import hh.swd20.BookReview.domain.BookRepository;
 import hh.swd20.BookReview.domain.Category;
 import hh.swd20.BookReview.domain.CategoryRepository;
-import hh.swd20.BookReview.domain.Review;
 import hh.swd20.BookReview.domain.ReviewRepository;
 
 @Controller

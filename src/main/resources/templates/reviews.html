@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>My reviews</title>
+</head>
+<body>
+	<div th:each="review : ${reviews}">
+		<p th:text="${review.book.title}"></p>  
+		<p th:text="${review.reviewText}"></p>
+		<p th:text="${review.rating}"></p>
+		
+	</div>
+	<!-- <p th:text="${reviews}"></p> -->
+</body>
+</html>

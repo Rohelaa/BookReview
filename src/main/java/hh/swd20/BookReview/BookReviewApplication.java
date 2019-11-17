@@ -35,20 +35,23 @@ public class BookReviewApplication {
 			categoryRepository.save(new Category("Historiallinen romaani"));
 			
 			logger.info("Added books.");
-			bookRepository.save(new Book("Eläinten vallankumous", "George Orwell", "1945", categoryRepository.findByName("Allegoria")));
+			Book book1 = new Book("Eläinten vallankumous", "George Orwell", "1945", categoryRepository.findByName("Allegoria"));
 			Book book2 = new Book("Rikos ja rangaistus", "F.M. Dostojevski", "1866", categoryRepository.findByName("Realismi"));
 			
 			
-			logger.info("Added reviews");
-			book2.addNewReview(new Review("Roope Laakso", "5", "Jee"));
-			book2.addNewReview(new Review("ASDADS", "4", "asdojasodasodjoasdjoasdoasdjoas"));
-			book2.addNewReview(new Review("Matti", "5", "Sikahyvä!!", book2));
+		
 			
 			logger.info("Users created.");
-			userRepository.save(new hh.swd20.BookReview.domain.User("user", "$2a$10$F5sj4llIzBZ427pgz7Vgn.fDK2AMQhmQ0.H/v/TlAdThKdky7sSja", "USER"));
-			userRepository.save(new hh.swd20.BookReview.domain.User("admin", "$2y$10$rnaTQTo1yBBFGwjvqaCNbuPMqt4POEFtO.Qh.8FlKS8y6lPaSboCC", "ADMIN"));
+			hh.swd20.BookReview.domain.User user = userRepository.save(new hh.swd20.BookReview.domain.User("user", "$2a$10$F5sj4llIzBZ427pgz7Vgn.fDK2AMQhmQ0.H/v/TlAdThKdky7sSja", "USER"));
+			hh.swd20.BookReview.domain.User admin = userRepository.save(new hh.swd20.BookReview.domain.User("admin", "$2y$10$rnaTQTo1yBBFGwjvqaCNbuPMqt4POEFtO.Qh.8FlKS8y6lPaSboCC", "ADMIN"));
 			
 			
+			logger.info("Added reviews");
+//			book2.addNewReview(new Review(user, "5", "Jee"));
+			book2.addNewReview(new Review(user, "4", "asdojasodasodjoasdjoasdoasdjoas", book1));
+			book2.addNewReview(new Review(user, "5", "Sikahyvä!!", book2));
+			
+			bookRepository.save(book1);
 			bookRepository.save(book2);
 			
 			

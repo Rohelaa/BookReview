@@ -15,7 +15,12 @@ public class Review {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Id
 	private Long reviewId;
-	private String reviewer;
+	//private String reviewer;
+	
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name = "userId")
+	private User reviewer;
 	private String rating;
 	private String reviewText;
 	
@@ -24,16 +29,17 @@ public class Review {
 	@JoinColumn(name = "bookId")
 	private Book book;
 	
+	
 	public Review() {}
 
-	public Review(String reviewer, String rating, String reviewText) {
+	public Review(User reviewer, String rating, String reviewText) {
 		super();
 		this.reviewer = reviewer;
 		this.rating = rating;
 		this.reviewText = reviewText;
 	}
 	
-	public Review(String reviewer, String rating, String reviewText, Book book) {
+	public Review(User reviewer, String rating, String reviewText, Book book) {
 		this.reviewer = reviewer;
 		this.rating = rating;
 		this.reviewText = reviewText;
@@ -48,11 +54,11 @@ public class Review {
 		this.reviewId = id;
 	}
 
-	public String getReviewer() {
+	public User getReviewer() {
 		return reviewer;
 	}
 
-	public void setReviewer(String reviewer) {
+	public void setReviewer(User reviewer) {
 		this.reviewer = reviewer;
 	}
 
@@ -79,6 +85,14 @@ public class Review {
 	public void setBook(Book book) {
 		this.book = book;
 	}
+
+	@Override
+	public String toString() {
+		return "Review [reviewId=" + reviewId + ", reviewer=" + reviewer + ", rating=" + rating + ", reviewText="
+				+ reviewText + ", book=" + book + "]";
+	}
+	
+	
 	
 	
 	

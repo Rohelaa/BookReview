@@ -34,6 +34,16 @@ public class ReviewController {
 	// Pricipal-rajapinta mahdollistaa kirjautumistunnuksen talteensaamisen
 	// Eli arvostelun tekijä on sama kuin sisäänkirjautunut käyttäjä
 	
+	
+	@GetMapping("/myReviews")
+	public String showUsersReviews(Model model, Principal principal) {
+		
+		String username = principal.getName();
+		User user = userRepo.findByUsername(username);
+		model.addAttribute("reviews", reviewRepo.findAllByReviewer(user));
+		return "reviews";
+	}
+	
 	@GetMapping("book/review/{title}")
 	public String writeNewReview(@PathVariable("title") String bookTitle, Model model, 
 			Principal principal) {
@@ -73,10 +83,11 @@ public class ReviewController {
 		// haetaan reposta kirja, jonka title on näkymän attribuutteihin lisätyn kirja-olion title
 		// asetetaan tämä kirja Review-olion muuttujaan setterillä
 		// talletetaan Review-olio repoon
-		
+		User user1 = userRepo.findByUsername(user.getUsername());
 		Book book1 = bookRepo.findByTitle(book.getTitle());
+		//userRepo.save(user);
 		review.setBook(book1);
-		review.setReviewer(user.getUsername());
+		review.setReviewer(user1);
 		reviewRepo.save(review);
 		book.addNewReview(review);
 		
