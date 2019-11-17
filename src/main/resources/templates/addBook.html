@@ -30,6 +30,7 @@
 			th:field="*{category}">
 			<option th:each="category : ${categories}" th:text="${category.name}"
 				th:value="${category.id}"></option>
+				
 			<!-- <option value="new">Create new</option> -->
 		</select><br />
 		
