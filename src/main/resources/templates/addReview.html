@@ -9,7 +9,7 @@
 		<input type=hidden th:field="${book.title}" th:value="${book.title}" />
 		<!-- <input type="hidden" th:field="*{book}" th:value="${book}" /> -->
 		<label>Reviewer</label>
-		<input type="text" th:field="*{reviewer}" /><br />
+		<input type="text" readonly="readonly" th:field="${user.username}" th:value="${user.username}" /><br />
 		<label>Review</label>
 		<input type="text" th:field="*{reviewText}" /><br />
 		<label>Rating</label>

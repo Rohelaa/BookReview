@@ -30,6 +30,19 @@ public class BookController {
 	
 	@Autowired
 	private ReviewRepository reviewRepo;
+	
+	
+	// Login & logout
+	
+	@GetMapping("/login")
+	public String login() {
+		return "login";
+	}
+	
+	@PostMapping("/logOut")
+	public String logOut() {
+		return "redirect:login?logout";
+	}
 
 	@RequestMapping("/")
 	public String index() {
@@ -74,16 +87,19 @@ public class BookController {
 	}
 	
 	
-	// REST
+	// REST 
+	
 	
 	@GetMapping("/booksRest")
 	public @ResponseBody List<Book> getBooksRest() {
 		 return (List<Book>) bookRepo.findAll();
 	}
 	
-	@GetMapping("/bookRest/{id}")
-	public @ResponseBody Optional<Book> getBookRest(@PathVariable(name = "id") Long bookTitle)  {
-		return bookRepo.findById(bookTitle);
+	@GetMapping("/booksRest/{id}")
+	public @ResponseBody Optional<Book> getBookRest(@PathVariable(name = "id") Long id)  {
+		return bookRepo.findById(id);
 	}
+	
+	
 	
 }
