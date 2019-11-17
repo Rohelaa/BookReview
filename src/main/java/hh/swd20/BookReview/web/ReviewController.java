@@ -1,8 +1,10 @@
 package hh.swd20.BookReview.web;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +15,8 @@ import hh.swd20.BookReview.domain.Book;
 import hh.swd20.BookReview.domain.BookRepository;
 import hh.swd20.BookReview.domain.Review;
 import hh.swd20.BookReview.domain.ReviewRepository;
+import hh.swd20.BookReview.domain.User;
+import hh.swd20.BookReview.domain.UserRepository;
 
 @Controller
 public class ReviewController {
@@ -22,15 +26,27 @@ public class ReviewController {
 	
 	@Autowired
 	private ReviewRepository reviewRepo;
+	
+	@Autowired
+	private UserRepository userRepo;
 
+	
+	// Pricipal-rajapinta mahdollistaa kirjautumistunnuksen talteensaamisen
+	// Eli arvostelun tekijä on sama kuin sisäänkirjautunut käyttäjä
+	
 	@GetMapping("book/review/{title}")
-	public String writeNewReview(@PathVariable("title") String bookTitle, Model model) {
+	public String writeNewReview(@PathVariable("title") String bookTitle, Model model, 
+			Principal principal) {
+		String username = principal.getName();
+		model.addAttribute("user", userRepo.findByUsername(username));
 		model.addAttribute("book", bookRepo.findByTitle(bookTitle));
 		model.addAttribute("review", new Review());
 		return "addReview";
 	}
 	
+	
 	@GetMapping("book/delete/{bookTitle}/{reviewId}")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public String deleteReview(@PathVariable("bookTitle") String bookTitle, @PathVariable("reviewId") Long reviewId, Model model) {
 		
 		reviewRepo.deleteById(reviewId);
@@ -50,7 +66,7 @@ public class ReviewController {
 	}
 	
 	@PostMapping("saveReview")
-	public String saveReview(Review review, Book book) {
+	public String saveReview(Review review, Book book, User user) {
 		//review.setBook(book);
 		
 		// toimii kait
@@ -60,6 +76,7 @@ public class ReviewController {
 		
 		Book book1 = bookRepo.findByTitle(book.getTitle());
 		review.setBook(book1);
+		review.setReviewer(user.getUsername());
 		reviewRepo.save(review);
 		book.addNewReview(review);
 		
@@ -69,6 +86,7 @@ public class ReviewController {
 //		book.addNewReview(review);
 //		bookRepo.save(bookRepo.findByTitle(book.getTitle()));
 		
+		// Eläinten vallankumous ei tule osoitekenttään niinkuin pitäisi ? Ääkköset syynä ?
 		return "redirect:book/" + book.getTitle();
 	}
 }
