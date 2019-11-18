@@ -7,10 +7,10 @@
 </head>
 <body>
 	<!-- Google CDN (content delivery network) -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
 	
 	<!-- Kokeilua. Painiketta klikkaamalla aukeaisi syöttökenttä, johon voisi syöttää uuden kategorian nimen -->
-	<script type="text/javascript">
+	<!-- <script type="text/javascript">
 	
 		$(document).ready(function() {
 			
@@ -20,6 +20,19 @@
 			
 		});
 		
+	</script> -->
+	<script type="text/javascript">
+		function createNewCategory() {
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					document.getElementById("categoryCreator").innerHTML =
+						'<label>Create a new category:</label>' + '<input type="text" th:field="${category.name}" /><br />';
+				}
+			}
+			/* xhttp.open("GET", "asd", true); */
+			xhttp.send();
+		}
 	</script>
 
 	<form th:object="${book}" action="#" method="post"
@@ -30,17 +43,17 @@
 			th:field="*{category}">
 			<option th:each="category : ${categories}" th:text="${category.name}"
 				th:value="${category.id}"></option>
+				<option onselect="createNewCategory()" value="new">Create new</option>
 				
 			<!-- <option value="new">Create new</option> -->
 		</select><br />
 		
-		<button id="createNew">Create new</button>
+		<!-- <button id="createNew">Create new</button> -->
 		
 		<!-- Kenttä, joka tulisi näkyviin painiketta klikkaamalla -->
 		<!-- inline CSS  -->
-		<div style="visibility: hidden;" id="categoryCreator">
-			<label>Create a new category:</label>
-			<input type="text" th:field="${category.name}" /><br />
+		<div id="categoryCreator"> <!-- style="visibility: hidden;"  --> 
+			
 		</div>
 		
 		<input type="submit" value="Add" /> 
