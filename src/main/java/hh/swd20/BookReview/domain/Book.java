@@ -11,19 +11,29 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Book {
 
+	@NotNull
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Id
 	private Long bookId;
+	
+	@Size(min = 1, max = 50)
 	private String title;
+	
+	@Size(min = 1, max = 50)
 	private String author;
+	
+	@Size(min = 1, max = 4)
 	private String year;
 	
+	@NotNull
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "categoryId")

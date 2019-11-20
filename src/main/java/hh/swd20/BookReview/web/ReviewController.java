@@ -54,6 +54,12 @@ public class ReviewController {
 		return "addReview";
 	}
 	
+	@GetMapping("delete/{id}")
+	public String deleteOwnReview(@PathVariable("id") Long reviewId) {
+		reviewRepo.deleteById(reviewId);
+		return "redirect:../myReviews";
+	}
+	
 	
 	@GetMapping("book/delete/{bookTitle}/{reviewId}")
 	@PreAuthorize("hasAuthority('ADMIN')")

@@ -28,7 +28,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 		.authorizeRequests()
+		// h2-console toimimaan Spring-securityn lisäyksen jälkeen
 		.antMatchers("/h2-console/**").permitAll()
+		.anyRequest().authenticated()
 		.and().csrf().ignoringAntMatchers("/h2-console/**")
 		.and().headers().frameOptions().sameOrigin()
 		.and()
