@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class Book {
 
-	@NotNull
+	
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Id
 	private Long bookId;

@@ -46,10 +46,21 @@
 	<form th:object="${book}" action="#" method="post"
 		th:action="@{saveBook}">
 		
-		<label>Title: <input th:field="*{title}" /></label><div th:if="${#fields.hasErrors('title')}" th:errors="*{title}"><p>Error</p></div> <br /> <label>Author:
+		<label>Title: <input th:field="*{title}" /></label>
+		<div th:if="${#fields.hasErrors('title')}" th:errors="*{title}">
+			<p>Error</p>
+		</div><br  /> 
+		 <label>Author:
 			<input th:field="*{author}" />
-		</label><br /> <label>Year: </label> <input th:field=*{year} /><br /> <label>Category:
-		</label> <select th:field="*{category}">
+		</label>
+		<div th:if="${#fields.hasErrors('author')}" th:errors="*{author}">
+			Error
+		</div><br /> 
+		<label>Year: <input th:field=*{year} /></label>
+		<div>
+			Error
+		</div><br /> 
+		<label>Category: <select th:field="*{category}">
 			<option value=""></option>
 			<option th:each="category : ${categories}" th:text="${category.name}"
 				th:value="${category.id}"></option>
@@ -57,7 +68,7 @@
 			<!-- <option onselect="createNewCategory()" value="new">Create new</option> -->
 
 			<!-- <option value="new">Create new</option> -->
-		</select><br />
+		</select></label> <br />
 
 		<button id="createNew">Create new</button>
 

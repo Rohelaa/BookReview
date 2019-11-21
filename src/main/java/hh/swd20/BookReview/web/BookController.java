@@ -68,15 +68,16 @@ public class BookController {
 	// BindingResult olio tarkistaa, ovatko lomakkeeseen syötetyt tiedot annettujen ehtojen mukaiset
 	
 	@PostMapping("/saveBook")
-	public String saveNewBook(@Valid Book book , Category category, BindingResult bindingResult) {
+	public String saveNewBook(@Valid Book book, Category category, BindingResult bindingResult) {
 		
 		
 
 		
 		// Luotu kategoria on ensin tallennettava repoon, jotta sen voi setterillä tallettaa olion muuttujaan
-		categoryRepo.save(category);
+		
 		
 		if (category != null) {
+			categoryRepo.save(category);
 			book.setCategory(category);
 		}
 		
