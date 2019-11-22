@@ -81,7 +81,7 @@ public class BookController {
 		}
 		
 		if (bindingResult.hasErrors()) {
-			return "addBook";
+			return "redirect:addBook";
 		}
 		
 		bookRepo.save(book);

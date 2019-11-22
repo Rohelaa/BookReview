@@ -12,6 +12,7 @@
 		<input type="text" readonly="readonly" th:field="${user.username}" th:value="${user.username}" /><br />
 		<label>Review</label>
 		<input type="text" th:field="*{reviewText}" /><br />
+		<!-- <div th:if="${#fields.hasErrors('reviewText')}" th:errors="*{reviewText}">Error</div> -->
 		<label>Rating</label>
 		<input type="text" th:field="*{rating}" /><br />
 		<!-- <input type="text" th:field="*{book}" th:value="${book.title}" /> -->
