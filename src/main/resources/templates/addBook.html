@@ -13,7 +13,6 @@
 	<!-- Kokeilua. Painiketta klikkaamalla aukeaisi syöttökenttä, johon voisi syöttää uuden kategorian nimen -->
 
 	<script type="text/javascript">
-	
 		$(document).ready(function() {
 
 			$('#createNew').click(function() {
@@ -45,7 +44,47 @@
 
 	<form th:object="${book}" action="#" method="post"
 		th:action="@{saveBook}">
+		<table>
+			<tr>
+				<td>Title: <input type="text" th:field="*{title}" /></td>
+				<td th:if="${#fields.hasErrors('title')}" th:errors="*{title}">
+					Error
+				</td>
+			</tr>
+				<!-- <br /> --> 
+			<tr>
+				<td><label>Author: <input th:field="*{author}" /></label><br /></td>
+				<td th:if="${#fields.hasErrors('author')}" th:errors="*{author}">Error</td>
+			</tr>
+			<tr>
+				<td><label>Year: <input th:field=*{year} /></label><br /> </td>
+				<td th:if="${#fields.hasErrors('year')}" th:errors="*{year}">Error</td>
+			</tr>
+			<tr>
+				<td>
+					<label>Category:
+					<select th:field="*{category}">
+						<option value=""></option>
+						<option th:each="category : ${categories}"
+							th:text="${category.name}" th:value="${category.id}"></option>
+						<!-- <option onselect="createNewCategory()" value="new">Create new</option> -->
+						<!-- <option value="new">Create new</option> -->
+					</select></label> <br />
+				</td>
+				<td th:if="${#fields.hasErrors('category')}" th:errors="*{category}">Error</td>
+			</tr>
+		</table>
 		
+<<<<<<< HEAD
+			<button id="createNew">Create new</button>
+
+			<!-- Kenttä, joka tulisi näkyviin painiketta klikkaamalla -->
+			<!-- inline CSS  -->
+			<div id="categoryCreator" style="visibility: hidden;">
+				<label>Create a new category: <input type="text"
+					th:field="${category.name}" /></label><br />
+			</div>
+=======
 		<label>Title: <input th:field="*{title}" /></label>
 		<div th:if="${#fields.hasErrors('title')}" th:errors="*{title}">
 			<p>Error</p>
@@ -80,7 +119,10 @@
 		</div>
 
 		<input type="submit" value="Add" />
+>>>>>>> 700b828f9844082895f85433229b05164961ed69
 
+			<input type="submit" value="Add" />
+		
 	</form>
 </body>
 </html>

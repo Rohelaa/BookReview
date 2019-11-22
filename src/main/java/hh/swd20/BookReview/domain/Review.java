@@ -20,7 +20,6 @@ public class Review {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Id
 	private Long reviewId;
-	//private String reviewer;
 	
 	@NotNull
 	@JsonIgnore
@@ -28,7 +27,8 @@ public class Review {
 	@JoinColumn(name = "userId")
 	private User reviewer;
 	
-	@Max(5) @Min(0)
+
+	//@Min(value = 1) @Max(value = 5)
 	private String rating;
 	
 	@Size(min = 1, max = 5000)
