@@ -27,6 +27,7 @@ public class Review {
 	@JoinColumn(name = "userId")
 	private User reviewer;
 	
+
 	//@Min(value = 1) @Max(value = 5)
 	private String rating;
 	

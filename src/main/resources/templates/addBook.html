@@ -75,6 +75,7 @@
 			</tr>
 		</table>
 		
+<<<<<<< HEAD
 			<button id="createNew">Create new</button>
 
 			<!-- Kenttä, joka tulisi näkyviin painiketta klikkaamalla -->
@@ -83,6 +84,42 @@
 				<label>Create a new category: <input type="text"
 					th:field="${category.name}" /></label><br />
 			</div>
+=======
+		<label>Title: <input th:field="*{title}" /></label>
+		<div th:if="${#fields.hasErrors('title')}" th:errors="*{title}">
+			<p>Error</p>
+		</div><br  /> 
+		 <label>Author:
+			<input th:field="*{author}" />
+		</label>
+		<div th:if="${#fields.hasErrors('author')}" th:errors="*{author}">
+			Error
+		</div><br /> 
+		<label>Year: <input th:field=*{year} /></label>
+		<div>
+			Error
+		</div><br /> 
+		<label>Category: <select th:field="*{category}">
+			<option value=""></option>
+			<option th:each="category : ${categories}" th:text="${category.name}"
+				th:value="${category.id}"></option>
+
+			<!-- <option onselect="createNewCategory()" value="new">Create new</option> -->
+
+			<!-- <option value="new">Create new</option> -->
+		</select></label> <br />
+
+		<button id="createNew">Create new</button>
+
+		<!-- Kenttä, joka tulisi näkyviin painiketta klikkaamalla -->
+		<!-- inline CSS  -->
+		<div id="categoryCreator" style="visibility: hidden;">
+			<label>Create a new category: <input type="text"
+				th:field="${category.name}" /></label><br />
+		</div>
+
+		<input type="submit" value="Add" />
+>>>>>>> 700b828f9844082895f85433229b05164961ed69
 
 			<input type="submit" value="Add" />
 		
