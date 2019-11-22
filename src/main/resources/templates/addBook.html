@@ -49,7 +49,7 @@
 		<label>Title: <input th:field="*{title}" /></label>
 		<div th:if="${#fields.hasErrors('title')}" th:errors="*{title}">
 			<p>Error</p>
-		</div><br  /> 
+		</div><br  />
 		 <label>Author:
 			<input th:field="*{author}" />
 		</label>
@@ -57,9 +57,9 @@
 			Error
 		</div><br /> 
 		<label>Year: <input th:field=*{year} /></label>
-		<div>
+		<!-- <div>
 			Error
-		</div><br /> 
+		</div> --><br /> 
 		<label>Category: <select th:field="*{category}">
 			<option value=""></option>
 			<option th:each="category : ${categories}" th:text="${category.name}"
