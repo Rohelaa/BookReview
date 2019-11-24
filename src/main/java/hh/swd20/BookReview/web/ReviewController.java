@@ -85,10 +85,12 @@ public class ReviewController {
 	@PostMapping("saveReview")
 	public String saveReview(Review review, Book book, User user, BindingResult bindingResult) {
 		//review.setBook(book);
+		
 		// toimii kait
 		// haetaan reposta kirja, jonka title on näkymän attribuutteihin lisätyn kirja-olion title
 		// asetetaan tämä kirja Review-olion muuttujaan setterillä
 		// talletetaan Review-olio repoon
+		
 		User user1 = userRepo.findByUsername(user.getUsername());
 		Book book1 = bookRepo.findByTitle(book.getTitle());
 		//userRepo.save(user);
@@ -108,6 +110,7 @@ public class ReviewController {
 //		bookRepo.save(bookRepo.findByTitle(book.getTitle()));
 		
 		// Eläinten vallankumous ei tule osoitekenttään niinkuin pitäisi ? Ääkköset syynä ?
-		return "redirect:book/" + book.getTitle();
+		return "redirect:book/" + book.getId();
+		
 	}
 }

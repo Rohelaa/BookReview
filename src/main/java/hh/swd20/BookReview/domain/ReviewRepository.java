@@ -7,5 +7,6 @@ import org.springframework.data.repository.CrudRepository;
 public interface ReviewRepository extends CrudRepository<Review, Long> {
 	
 	List<Review> findAllByBookTitle(String bookTitle);
+
 	List<Review> findAllByReviewer(User user); 
 }

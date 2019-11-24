@@ -35,7 +35,7 @@ public class Book {
 	@Size(min = 1, max = 4)
 	private String year;
 	
-	@NotNull
+	//@NotNull
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "categoryId")

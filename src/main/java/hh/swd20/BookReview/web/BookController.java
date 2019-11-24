@@ -66,9 +66,10 @@ public class BookController {
 	}
 	
 	// BindingResult olio tarkistaa, ovatko lomakkeeseen syötetyt tiedot annettujen ehtojen mukaiset
+	// Kategoriaa ei tarvitse antaa parametrina metodille
 	
 	@PostMapping("/saveBook")
-	public String saveNewBook(@Valid Book book, Category category, BindingResult bindingResult) {
+	public String saveNewBook(@Valid Book book, Category category /*BindingResult bindingResult*/) {
 		
 		
 
@@ -76,14 +77,39 @@ public class BookController {
 		// Luotu kategoria on ensin tallennettava repoon, jotta sen voi setterillä tallettaa olion muuttujaan
 		
 		
-		if (category != null) {
-			categoryRepo.save(category);
-			book.setCategory(category);
-		}
 		
-		if (bindingResult.hasErrors()) {
-			return "redirect:addBook";
-		}
+		//if (book.getCategory() != null) {
+			
+			//book.setCategory(category);
+//			boolean loytynyt = false;
+			
+//			for (Category nextCategory : categoryRepo.findAll()) {
+//				if ((book.getCategory().getName()).equalsIgnoreCase(nextCategory.getName())) {
+//					loytynyt = true;
+//				}
+//			}
+			
+//			if (loytynyt == false) {
+//				
+//				// ei ollenkaan talletusta?!
+//				// nyt tallettaa toisen entityn päälle repossa
+//				
+//				categoryRepo.save(book.getCategory());
+//			}
+			
+			
+			
+//		}
+		
+//		if (bindingResult.hasErrors()) {
+//			return "redirect:addBook";
+//		}
+		
+		// uuden kategorian luominen onnistuu
+		// nyt vain täytyy saada valmiiden kategorioiden lista toimimaan
+		
+		categoryRepo.save(category);
+		book.setCategory(category);
 		
 		bookRepo.save(book);
 		return "redirect:books";
@@ -94,6 +120,14 @@ public class BookController {
 		model.addAttribute("book", bookRepo.findByTitle(bookTitle));
 		// model.addAttribute("reviews", reviewRepo.findAll());
 		model.addAttribute("reviews", reviewRepo.findAllByBookTitle(bookTitle));
+		return "bookInformation";
+	}
+	
+	@GetMapping("/book/{id}")
+	public String showBookInformationById(@PathVariable(name = "id") Long bookId, Model model) {
+		model.addAttribute("book", bookRepo.findByBookId(bookId));
+		// model.addAttribute("reviews", reviewRepo.findAll());
+		//model.addAttribute("reviews", reviewRepo.findAllByBookTitle(bookTitle));
 		return "bookInformation";
 	}
 	

@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 
-<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
 <title>Add a new book</title>
 </head>
 <body>
@@ -14,9 +14,15 @@
 
 	<script type="text/javascript">
 		$(document).ready(function() {
+			
+			// Nyt lisää valmiin kategorian mutta uuden kategorian luominen tallettaa tietokantaan tyhjän kategorian
 
 			$('#createNew').click(function() {
 				$('#categoryCreator').css("visibility", "visible");
+				//$('#newCategoryInput').attr('th:field', '${category.name}');
+				$('#categorySelector').removeAttr('th:field'); 
+				$('#categorySelector').remove();
+				
 
 				// ehkäisee selaimen oletustoiminnan
 				// ilman tätä painikkeen klikkaus vie takaisin kirjalista-näkymään
@@ -42,86 +48,48 @@
 		}
 	</script> -->
 
-	<form th:object="${book}" action="#" method="post"
-		th:action="@{saveBook}">
-		<table>
-			<tr>
-				<td>Title: <input type="text" th:field="*{title}" /></td>
-				<td th:if="${#fields.hasErrors('title')}" th:errors="*{title}">
-					Error
-				</td>
-			</tr>
-				<!-- <br /> --> 
-			<tr>
-				<td><label>Author: <input th:field="*{author}" /></label><br /></td>
-				<td th:if="${#fields.hasErrors('author')}" th:errors="*{author}">Error</td>
-			</tr>
-			<tr>
-				<td><label>Year: <input th:field=*{year} /></label><br /> </td>
-				<td th:if="${#fields.hasErrors('year')}" th:errors="*{year}">Error</td>
-			</tr>
-			<tr>
-				<td>
-					<label>Category:
-					<select th:field="*{category}">
-						<option value=""></option>
-						<option th:each="category : ${categories}"
-							th:text="${category.name}" th:value="${category.id}"></option>
-						<!-- <option onselect="createNewCategory()" value="new">Create new</option> -->
-						<!-- <option value="new">Create new</option> -->
-					</select></label> <br />
-				</td>
-				<td th:if="${#fields.hasErrors('category')}" th:errors="*{category}">Error</td>
-			</tr>
-		</table>
+	<form th:object="${book}" action="#" method="post" th:action="@{saveBook}">
 		
-<<<<<<< HEAD
-			<button id="createNew">Create new</button>
-
-			<!-- Kenttä, joka tulisi näkyviin painiketta klikkaamalla -->
-			<!-- inline CSS  -->
-			<div id="categoryCreator" style="visibility: hidden;">
-				<label>Create a new category: <input type="text"
-					th:field="${category.name}" /></label><br />
-			</div>
-=======
-		<label>Title: <input th:field="*{title}" /></label>
+			
+		<label>Title:</label> 
+		<input type="text" th:field="*{title}" />
 		<div th:if="${#fields.hasErrors('title')}" th:errors="*{title}">
-			<p>Error</p>
-		</div><br  />
-		 <label>Author:
-			<input th:field="*{author}" />
-		</label>
-		<div th:if="${#fields.hasErrors('author')}" th:errors="*{author}">
 			Error
-		</div><br /> 
-		<label>Year: <input th:field=*{year} /></label>
-		<!-- <div>
-			Error
-		</div> --><br /> 
-		<label>Category: <select th:field="*{category}">
+		</div>
+	
+		<br /> 
+	
+		<label>Author:</label> 
+		<input th:field="*{author}" />
+		<br />
+		<div th:if="${#fields.hasErrors('author')}" th:errors="*{author}">Error</div>
+	
+		<label>Year:</label>
+		<input th:field=*{year} /><br />
+		<div th:if="${#fields.hasErrors('year')}" th:errors="*{year}">Error</div>
+	
+	
+		<label>Category:</label>
+		<select id="categorySelector" th:field="*{category}">
 			<option value=""></option>
-			<option th:each="category : ${categories}" th:text="${category.name}"
-				th:value="${category.id}"></option>
-
-			<!-- <option onselect="createNewCategory()" value="new">Create new</option> -->
-
-			<!-- <option value="new">Create new</option> -->
-		</select></label> <br />
-
+			<option th:each="category : ${categories}"
+				th:text="${category.name}" th:value="${category.id}"></option>
+			<!-- <option onselect="createNewCategory()" value="new">Create new</option>
+			<option value="new">Create new</option> -->
+		</select> <br />
+		
+		<div th:if="${#fields.hasErrors('category')}" th:errors="*{category}">Error</div> 
+	
+	
 		<button id="createNew">Create new</button>
-
+		
 		<!-- Kenttä, joka tulisi näkyviin painiketta klikkaamalla -->
 		<!-- inline CSS  -->
 		<div id="categoryCreator" style="visibility: hidden;">
-			<label>Create a new category: <input type="text"
-				th:field="${category.name}" /></label><br />
+			<label>Create a new category: <input id="newCategoryInput" type="text" th:field="${category.name}" /></label><br />
 		</div>
-
+	
 		<input type="submit" value="Add" />
->>>>>>> 700b828f9844082895f85433229b05164961ed69
-
-			<input type="submit" value="Add" />
 		
 	</form>
 </body>

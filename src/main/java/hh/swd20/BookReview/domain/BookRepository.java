@@ -6,8 +6,8 @@ public interface BookRepository extends CrudRepository<Book, Long> {
 
 	// metodi palauttaa olion, jonka tietotyyppi on 'Book'
 	
-	Book findByTitle(String id);
-	
+	Book findByTitle(String title);
+	Book findByBookId(Long id);
 	
 	
 }
