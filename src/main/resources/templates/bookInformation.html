@@ -3,11 +3,11 @@
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 <meta charset="utf-8">
-<title>asd</title>
+<title th:text="${book.title}"></title>
 </head>
 <body>
-	<a th:href="@{review/{title}(title=${book.title})}">Review this
-		book</a>
+	<a href="../booklist">Return</a>
+	<a th:href="@{review/{id}(id=${book.id})}">Review this book</a>
 	<div th:object="${book}">
 		<p th:text="*{title}"></p>
 		<p th:text="*{author}"></p>
@@ -32,7 +32,7 @@
 		<p th:text="${review.rating}"></p>
 		<div sec:authorize="hasAuthority('ADMIN')">
 			<a
-				th:href="@{delete/{title}/{id}(title=${book.title}, id=${review.id})}">Delete</a>
+				th:href="@{delete/{bookId}/{reviewId}(bookId=${book.id}, reviewId=${review.id})}">Delete</a>
 		</div>
 	</div>
 

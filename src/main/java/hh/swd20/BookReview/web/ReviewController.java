@@ -45,12 +45,12 @@ public class ReviewController {
 		return "reviews";
 	}
 	
-	@GetMapping("book/review/{title}")
-	public String writeNewReview(@PathVariable("title") String bookTitle, Model model, 
+	@GetMapping("book/review/{id}")
+	public String writeNewReview(@PathVariable("id") Long bookId, Model model, 
 			Principal principal) {
 		String username = principal.getName();
 		model.addAttribute("user", userRepo.findByUsername(username));
-		model.addAttribute("book", bookRepo.findByTitle(bookTitle));
+		model.addAttribute("book", bookRepo.findByBookId(bookId));
 		model.addAttribute("review", new Review());
 		return "addReview";
 	}
@@ -62,12 +62,12 @@ public class ReviewController {
 	}
 	
 	
-	@GetMapping("book/delete/{bookTitle}/{reviewId}")
+	@GetMapping("book/delete/{bookId}/{reviewId}")
 	@PreAuthorize("hasAuthority('ADMIN')")
-	public String deleteReview(@PathVariable("bookTitle") String bookTitle, @PathVariable("reviewId") Long reviewId, Model model) {
+	public String deleteReview(@PathVariable("bookId") Long bookId, @PathVariable("reviewId") Long reviewId, Model model) {
 		
 		reviewRepo.deleteById(reviewId);
-		Book book = bookRepo.findByTitle(bookTitle);
+		Book book = bookRepo.findByBookId(bookId);
 		List<Review> reviews = book.getReviews();
 		
 		for (Review review : reviews) {
@@ -79,7 +79,7 @@ public class ReviewController {
 		book.setReviews(reviews);
 		
 		// takaisin kirjanäkymään
-		return "redirect:../../../book/" + bookTitle;
+		return "redirect:../../../book/" + bookId;
 	}
 	
 	@PostMapping("saveReview")
@@ -92,7 +92,7 @@ public class ReviewController {
 		// talletetaan Review-olio repoon
 		
 		User user1 = userRepo.findByUsername(user.getUsername());
-		Book book1 = bookRepo.findByTitle(book.getTitle());
+		Book book1 = bookRepo.findByBookId(book.getId());
 		//userRepo.save(user);
 		review.setBook(book1);
 		review.setReviewer(user1);

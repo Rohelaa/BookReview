@@ -5,6 +5,7 @@
 <title>My reviews</title>
 </head>
 <body>
+	<a href="booklist">Return</a>
 	<div th:each="review : ${reviews}">
 		<p th:text="${review.book.title}"></p>  
 		<p th:text="${review.reviewText}"></p>

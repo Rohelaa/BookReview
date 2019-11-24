@@ -14,7 +14,7 @@
 	<a href="/myReviews">My reviews</a>
 
 	<div th:each="book : ${books}">
-		<a th:href="@{book/{title}(title=${book.title})}" th:text="${book.title} + '|' + ${book.author}"></a>
+		<a th:href="@{book/{id}(id=${book.id})}" th:text="${book.title} + '|' + ${book.author}"></a>
 	</div>
 
 </body>

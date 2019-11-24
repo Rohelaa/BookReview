@@ -51,10 +51,10 @@ public class BookController {
 		return "index";
 	}
 	
-	@GetMapping("/books")
+	@GetMapping("/booklist")
 	public String getBookPage(Model model) {
 		model.addAttribute("books", bookRepo.findAll());
-		return "books";
+		return "booklist";
 	}
 	
 	@GetMapping("/addBook")
@@ -112,22 +112,23 @@ public class BookController {
 		book.setCategory(category);
 		
 		bookRepo.save(book);
-		return "redirect:books";
+		return "redirect:booklist";
 	}
 	
-	@GetMapping("/book/{title}")
-	public String showBookInformation(@PathVariable(name = "title") String bookTitle, Model model) {
-		model.addAttribute("book", bookRepo.findByTitle(bookTitle));
-		// model.addAttribute("reviews", reviewRepo.findAll());
-		model.addAttribute("reviews", reviewRepo.findAllByBookTitle(bookTitle));
-		return "bookInformation";
-	}
+//	@GetMapping("/book/{title}")
+//	public String showBookInformation(@PathVariable(name = "title") String bookTitle, Model model) {
+//		model.addAttribute("book", bookRepo.findByTitle(bookTitle));
+//		// model.addAttribute("reviews", reviewRepo.findAll());
+//		model.addAttribute("reviews", reviewRepo.findAllByBookTitle(bookTitle));
+//		return "bookInformation";
+//	}
 	
 	@GetMapping("/book/{id}")
 	public String showBookInformationById(@PathVariable(name = "id") Long bookId, Model model) {
 		model.addAttribute("book", bookRepo.findByBookId(bookId));
-		// model.addAttribute("reviews", reviewRepo.findAll());
-		//model.addAttribute("reviews", reviewRepo.findAllByBookTitle(bookTitle));
+		//model.addAttribute("reviews", reviewRepo.findAll());
+		//model.addAttribute("reviews", reviewRepo.findAllByBookId(bookId));
+		model.addAttribute("reviews", reviewRepo.findAllByBook(bookRepo.findByBookId(bookId)));
 		return "bookInformation";
 	}
 	

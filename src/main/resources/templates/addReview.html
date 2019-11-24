@@ -5,8 +5,9 @@
 <title>Review</title>
 </head>
 <body>
+	<a th:href="@{../{id}(id=${book.id})}">Return</a>
 	<form th:object="${review}" th:action="@{/saveReview}" action="#" method="post">
-		<input type=hidden th:field="${book.title}" th:value="${book.title}" />
+		<input type=hidden th:field="${book.id}" th:value="${book.id}" />
 		<!-- <input type="hidden" th:field="*{book}" th:value="${book}" /> -->
 		<label>Reviewer</label>
 		<input type="text" readonly="readonly" th:field="${user.username}" th:value="${user.username}" /><br />
