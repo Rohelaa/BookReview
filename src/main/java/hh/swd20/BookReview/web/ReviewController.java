@@ -86,8 +86,8 @@ public class ReviewController {
 	public String saveReview(Review review, Book book, User user, BindingResult bindingResult) {
 		//review.setBook(book);
 		
-		// toimii kait
-		// haetaan reposta kirja, jonka title on näkymän attribuutteihin lisätyn kirja-olion title
+	
+		// haetaan reposta kirja, jonka id on näkymän attribuutteihin lisätyn kirja-olion id
 		// asetetaan tämä kirja Review-olion muuttujaan setterillä
 		// talletetaan Review-olio repoon
 		
@@ -103,13 +103,6 @@ public class ReviewController {
 			return "addReview";
 		}
 		
-//		bookRepo.save(book);
-//		review.setBook(book);
-//		reviewRepo.save(review);
-//		book.addNewReview(review);
-//		bookRepo.save(bookRepo.findByTitle(book.getTitle()));
-		
-		// Eläinten vallankumous ei tule osoitekenttään niinkuin pitäisi ? Ääkköset syynä ?
 		return "redirect:book/" + book.getId();
 		
 	}

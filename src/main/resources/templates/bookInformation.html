@@ -13,19 +13,8 @@
 		<p th:text="*{author}"></p>
 		<p th:text="*{year}"></p>
 		<p th:text="*{category.name}"></p>
-
-		<!-- *{reviews} näyttää tyhjän listan -->
-		<!-- <p th:text="*{reviews}"></p> -->
 	</div>
-	<!-- <form th:object="${review}" action="#" th:action="@{saveReview}" method="post">
-		<label>Reviewer:</label>
-		<input type="text" th:field="*{reviewer}" /><br />
-		<label>Review:</label>
-		<input type="text" th:field="*{reviewText}" /><br />
-		<label>Rating:</label>
-		<input type="text" th:field="*{rating}" /><br />
-		<input type="submit" value="Submit" />
-	</form> -->
+<div>----------</div>
 	<div th:each="review : ${reviews}">
 		<p th:text="${review.reviewer.username}"></p>
 		<p th:text="${review.reviewText}"></p>
@@ -34,6 +23,7 @@
 			<a
 				th:href="@{delete/{bookId}/{reviewId}(bookId=${book.id}, reviewId=${review.id})}">Delete</a>
 		</div>
+		<div>----------</div>
 	</div>
 
 </body>
