@@ -29,7 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 		.authorizeRequests()
 		// h2-console toimimaan Spring-securityn lisäyksen jälkeen
-		.antMatchers("/h2-console/**").permitAll()
+		.antMatchers("/h2-console/**", "/booksRest").permitAll()
 		.anyRequest().authenticated()
 		.and().csrf().ignoringAntMatchers("/h2-console/**")
 		.and().headers().frameOptions().sameOrigin()
